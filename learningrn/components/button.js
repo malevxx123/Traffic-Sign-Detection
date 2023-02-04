@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
 const CustomButton = (props) => {
   const {onPress, buttonText = "Add Text"} = props;
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: 'black',
     borderWidth: 1,
-    marginVertical: 5
+    margin: 5
   },
   textStyle: {
     fontSize: 16
