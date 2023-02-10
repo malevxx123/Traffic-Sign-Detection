@@ -1,21 +1,9 @@
-import React, {useState, useEffect, useRef} from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
 import BackButton from "../../components/back";
-import { Camera, CameraType } from 'expo-camera';
-import * as MediaLibrary from 'expo-media-library';
-import { Directory } from '@expo/vector-icons'
-
-const Button = ({title, onPress, icon, color}) => {
-  return (
-    <TouchableOpacity onPress={onPress} style={styles.button}>
-      <Directory name={icon} size={28} color={color ? color : '#f1f1f1'}/>
-      <Text style={styles.text}></Text>
-      <View>
-        <Button title={'Take a picture'} icon='camera' />
-      </View>
-    </TouchableOpacity>
-  )
-}
+import { Camera, CameraType } from "expo-camera";
+import * as MediaLibrary from "expo-media-library";
+import { Directory, Entypo } from "@expo/vector-icons";
 
 const CameraScreen = () => {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -28,9 +16,9 @@ const CameraScreen = () => {
     (async () => {
       MediaLibrary.requestPermissionsAsync();
       const cameraStatus = await Camera.requestCameraPermissionsAsync();
-      setHasCameraPermission(cameraStatus.status === 'granted');
+      setHasCameraPermission(cameraStatus.status === "granted");
     })();
-  }, [])
+  }, []);
   return (
     <View style={styles.container}>
       <Camera
@@ -39,10 +27,21 @@ const CameraScreen = () => {
         flashMode={flash}
         ref={cameraRef}
       >
-        <Text>hello</Text>
+        <TouchableOpacity style={styles.button} onPress={() => Alert.alert("Camera Pressed")}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Entypo name="camera" size={32} color={"#f1f1f1"} />
+            {/* <Text style={{ color: "white" }}>Take a picture</Text> */}
+          </View>
+        </TouchableOpacity>
       </Camera>
       <BackButton />
-      <Text>CameraScreen</Text>
     </View>
   );
 };
@@ -52,24 +51,28 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#f1f1f1",
     justifyContent: "center",
-    paddingBottom: 40,
+    paddingVertical: 40,
   },
   camera: {
     flex: 1,
     borderRadius: 20,
   },
   button: {
-    height: 40,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: 70,
+    width: 70,
+    position: "absolute",
+    bottom: 10,
+    right: "40%",
+    borderRadius: 34,
+    borderWidth: 2,
+    borderColor: 'white'
   },
   text: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 16,
-    color: '#f1f1f1',
+    color: "#f1f1f1",
     marginLeft: 10,
-  }
-})
+  },
+});
 
 export default CameraScreen;
