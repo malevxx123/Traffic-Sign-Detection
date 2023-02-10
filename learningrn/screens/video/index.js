@@ -14,10 +14,10 @@ const VideoScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "rgba(255, 255, 0, 0.5)", // neon yellow with 50% opacity
     alignItems: "center",
     justifyContent: "center",
-  }
+  },
 })
 
 export default VideoScreen;
